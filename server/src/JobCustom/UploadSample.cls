@@ -13,7 +13,7 @@ ClassMethod OnPage() As %Status [ ServerOnly = 1 ]
 		function startJob() {
 			// バッチ処理クラスのURL
 			var url = ((window.location.protocol === "https:")? "wss:":"ws:")
-                    + "//"+ window.location.host + "#($SYSTEM.CSP.GetDefaultApp($namespace))#" + "/JobCustom.BatchProcess2.cls";
+                    + "//"+ window.location.host + "#(%request.URLPrefix_$SYSTEM.CSP.GetDefaultApp($namespace))#" + "/JobCustom.BatchProcess2.cls";
 			// ログ出力領域
 			var log = document.getElementById("proclog");
 
@@ -21,7 +21,8 @@ ClassMethod OnPage() As %Status [ ServerOnly = 1 ]
 			var upfiles=document.getElementById("upfile").files;
 			var num = document.getElementById("loopnum").value;
 			var interval = document.getElementById("interval").value;
-			for( let i = 0 ; i < upfiles.length ; i++ ){
+			for ( let i = 0 ; i < upfiles.length ; i++ ) 
+			{
 				let upfile=upfiles[i];
 
 				// バッチジョブを実行
